@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 
-# Configuração da página para ocupar a tela inteira (opcional, mas fica melhor)
+# Configuração da página para ocupar a tela inteira
 st.set_page_config(layout="wide", page_title="Extrapolador ITTC-1957")
 
 def calcular_extrapolacao_excel(scale, L_m, S_m, S_s_input, k_factor, rho_m, nu_m, rho_s, nu_s, df_input):
@@ -12,9 +12,9 @@ def calcular_extrapolacao_excel(scale, L_m, S_m, S_s_input, k_factor, rho_m, nu_
         return pd.DataFrame(), None, None
 
     L_s = L_m * scale
-    S_s = S_s_input  # 24461.4 m²
+    S_s = S_s_input  
     g = 9.81
-    one_plus_k = 1 + k_factor  # 1.2039
+    one_plus_k = 1 + k_factor  
 
     v_m = df_clean["Vm [m/s]"].astype(float).values
     r_tm = df_clean["Rtm [N]"].astype(float).values
@@ -79,13 +79,11 @@ def calcular_extrapolacao_excel(scale, L_m, S_m, S_s_input, k_factor, rho_m, nu_
 
     return df_res, fig_r, fig_p
 
-# Dados Iniciais da Planilha
+# Dados Iniciais da Planilha Corrigidos
 dados_ensaio = pd.DataFrame({
     "Ponto":,
     "Vm [m/s]": [0.776, 0.846, 0.917, 0.987, 1.058, 1.128, 1.199],
     "Rtm [N]": [11.5, 13.5, 15.5, 18.0, 20.5, 23.0, 26.5]
-})
-
 })
 
 st.markdown("# 🛳️ Calculadora de Extrapolação ITTC-1957")
@@ -105,7 +103,6 @@ rho_s = col8.number_input("ρ Navio [kg/m³]", value=1025.0)
 nu_s = col9.number_input("ν Navio [m²/s]", value=1.19e-6, format="%.2e")
 
 st.markdown("### Dados do Ensaio (Tabela Editável)")
-# Tabela interativa para o usuário editar os dados
 input_table = st.data_editor(dados_ensaio, num_rows="dynamic", use_container_width=True)
 
 if st.button("⚡ Processar Extrapolação e Gerar Gráficos", type="primary"):
@@ -117,7 +114,6 @@ if st.button("⚡ Processar Extrapolação e Gerar Gráficos", type="primary"):
         st.markdown("### Resultados Extrapolados (Com PE em hp)")
         st.dataframe(df_res, use_container_width=True)
         
-        # Colocando os gráficos lado a lado
         g1, g2 = st.columns(2)
         with g1:
             st.plotly_chart(fig_r, use_container_width=True)
@@ -125,3 +121,4 @@ if st.button("⚡ Processar Extrapolação e Gerar Gráficos", type="primary"):
             st.plotly_chart(fig_p, use_container_width=True)
     else:
         st.error("Por favor, preencha a tabela de dados corretamente.")
+
