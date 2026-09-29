@@ -79,9 +79,8 @@ def calcular_extrapolacao_excel(scale, L_m, S_m, S_s_input, k_factor, rho_m, nu_
 
     return df_res, fig_r, fig_p
 
-# Dados Iniciais da Planilha Corrigidos
+# Dados Iniciais sem a linha de texto incompleta
 dados_ensaio = pd.DataFrame({
-    "Ponto":,
     "Vm [m/s]": [0.776, 0.846, 0.917, 0.987, 1.058, 1.128, 1.199],
     "Rtm [N]": [11.5, 13.5, 15.5, 18.0, 20.5, 23.0, 26.5]
 })
@@ -121,4 +120,5 @@ if st.button("⚡ Processar Extrapolação e Gerar Gráficos", type="primary"):
             st.plotly_chart(fig_p, use_container_width=True)
     else:
         st.error("Por favor, preencha a tabela de dados corretamente.")
+
 
