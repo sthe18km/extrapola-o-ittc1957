@@ -86,6 +86,8 @@ dados_ensaio = pd.DataFrame({
     "Rtm [N]": [11.5, 13.5, 15.5, 18.0, 20.5, 23.0, 26.5]
 })
 
+})
+
 st.markdown("# 🛳️ Calculadora de Extrapolação ITTC-1957")
 
 # Organizando os inputs em colunas
